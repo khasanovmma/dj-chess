@@ -1,0 +1,7 @@
+*.pyc
+.idea/*
+db.sqlite3
+README.md
+*.psd
+core/config/settings_private.yml
+venv

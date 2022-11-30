@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  web:
+    build: ./app
+    command: gunicorn django_chess.wsgi:application --bind 0.0.0.0:8000
+
+    volumes:
+      - static_volume:/code/staticfiles
+    restart: always
+    expose:
+      - 8000
+  
+  nginx:
+    build: ./nginx
+
+    volumes:
+      - static_volume:/home/staticfiles
+
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - web
+    
+
+volumes:
+  static_volume:
